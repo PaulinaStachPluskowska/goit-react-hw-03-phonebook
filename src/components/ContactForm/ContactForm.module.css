@@ -1,0 +1,63 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #303086;
+    border-radius: 5px;
+    height: fit-content;
+    width: 300px;
+    padding: 15px;
+    margin: 25px 0;
+  }
+  
+  .label {
+    font-size: 18px;
+    font-weight: 500;
+    color: #303086;
+    letter-spacing: 0.05em;
+    line-height: 1.5em;
+  }
+  
+  .input {
+    display: block;
+    width: 200px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #303086;
+    letter-spacing: 0.05em;
+    line-height: 1.5em;
+    border: 1px solid #303086;
+    border-radius: 5px;
+    padding-left: 10px;
+  }
+  
+  .button {
+    width: 120px;
+    color: #232366;
+    background-color: #c6cefa;
+    padding: 5px 10px;
+    max-width: fit-content;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+    letter-spacing: 0.05em;
+    border-style: none;
+    box-shadow: 1px 1px 1px #303086, 2px 2px 2px #303086, 2px 2px 2px #303086;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .button:hover {
+    cursor: pointer;
+    transform: scale(115%); 
+    background-color: #303086;
+    color: #c6cefa;
+    box-shadow: 1px 1px 1px #c6cefa, 2px 2px 2px #c6cefa, 2px 2px 2px #c6cefa;
+  }
+  
+  .button:active {
+    background-color: #303086;
+    color: #c6cefa;
+    box-shadow: 1px 1px 1px #c6cefa, 2px 2px 2px #c6cefa, 2px 2px 2px #c6cefa;
+  }
