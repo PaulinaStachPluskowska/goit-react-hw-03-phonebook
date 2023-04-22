@@ -7,22 +7,38 @@ import { ContactList } from "./ContactList/ContactList";
 import { Filter } from "./Filter/Filter";
 
 
-// const INITIAL_STATE = {
-//   contacts: [
-//     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-//     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-//     { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-//     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-//   ],
-//   filter: '',
-// };
+const INITIAL_STATE = {
+  contacts: [
+    { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
+    { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
+    { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
+    { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
+  ],
+  filter: '',
+};
 
 export class App extends Component {
-  // state = {...INITIAL_STATE};
 
   state = {
     contacts: [],
     filter: '',
+  }
+
+  componentDidMount() {
+    const storage = localStorage.getItem('contacts');
+    if (storage == null) {
+      localStorage.setItem('contacts', JSON.stringify(INITIAL_STATE.contacts));
+    } else {
+      this.setState({contacts: JSON.parse(storage)});
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
+      const newContacts = this.state.contacts;
+      const storage = JSON.stringify(newContacts);
+      localStorage.setItem('contacts', storage);
+    }
   }
 
   handleSubmit = event => {
@@ -30,9 +46,9 @@ export class App extends Component {
     const form = event.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    const newContact = {id: nanoid(6), name: name, number: number};
+    const newContact = {id: nanoid(), name: name, number: number};
     const namesArray = this.state.contacts.map(({name}) => name);
-
+          
     if (namesArray.includes(name)) {
       Notiflix.Notify.warning(`${name} is already in contacts.`,{
         position: 'center-top',
@@ -40,8 +56,6 @@ export class App extends Component {
         timeout: 1500,
         width: '350px',
       });
-      // alert(`${name} is already in contacts.`);
-      // return true;
     } else {
       this.setState(({contacts}) => ({contacts: [...contacts, newContact],
       }));
