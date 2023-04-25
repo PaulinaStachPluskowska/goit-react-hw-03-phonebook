@@ -26,7 +26,7 @@ export class App extends Component {
 
   componentDidMount() {
     const storage = localStorage.getItem('contacts');
-    if (storage == null) {
+    if (storage === null) {
       localStorage.setItem('contacts', JSON.stringify(INITIAL_STATE.contacts));
     } else {
       this.setState({contacts: JSON.parse(storage)});
@@ -46,11 +46,19 @@ export class App extends Component {
     const form = event.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
+    const { contacts } = this.state;
     const newContact = {id: nanoid(), name: name, number: number};
-    const namesArray = this.state.contacts.map(({name}) => name);
+    // const namesArray = this.state.contacts.map(({name}) => name);
           
-    if (namesArray.includes(name)) {
+    if (contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase(),)) {
       Notiflix.Notify.warning(`${name} is already in contacts.`,{
+        position: 'center-top',
+        closeButton: true,
+        timeout: 1500,
+        width: '350px',
+      });
+    } else if (contacts.find(contact => contact.number.toLowerCase() === number.toLowerCase(),)) {
+      Notiflix.Notify.warning(`The number ${number} is already in contacts.`,{
         position: 'center-top',
         closeButton: true,
         timeout: 1500,
